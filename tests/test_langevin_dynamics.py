@@ -38,6 +38,20 @@ class TestLangevin_dynamics(unittest.TestCase):
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output
+        
+    def test_file_io(self):
+        langevin_simulation(3,'test_output')
+        output = open('test_output.txt')
+        output_string = output.readline()
+        gold_file = open('langevin_output_gold.txt')
+        gold_file_string = gold_file.readline()
+        self.assertEqual(output_string,gold_file_string)
+    
+    def test_force(self):
+        force = net_force(2.5,'potential_energy_sample')
+        self.assertEqual(force,-15)
+        
+        
 
 
 if __name__ == '__main__':
