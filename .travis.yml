@@ -29,6 +29,7 @@ env:
 - TOXENV=py26
 - TOXENV=pypy
 install: 
+- pip install langevin_dynamics
 - pip install -U tox
 - pip install codecov
 - pip install click
