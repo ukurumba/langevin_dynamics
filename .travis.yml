@@ -32,6 +32,7 @@ install:
 - pip install -U tox
 - pip install codecov
 - pip install click
+- pip install numpy 
 language: python
 python: 3.5
 script: 
