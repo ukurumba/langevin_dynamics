@@ -11,6 +11,7 @@ Tests for `langevin_dynamics` module.
 
 import sys
 import unittest
+import numpy as np
 from contextlib import contextmanager
 from click.testing import CliRunner
 

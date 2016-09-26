@@ -29,6 +29,12 @@ env:
 - TOXENV=py26
 - TOXENV=pypy
 install: pip install -U tox
+pip install codecov
 language: python
 python: 3.5
-script: tox -e ${TOXENV}
+script: 
+    - tox -e ${TOXENV}
+    - cd tests
+    - coverage run tests.py
+after_success: codecov
+
