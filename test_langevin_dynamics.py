@@ -40,15 +40,7 @@ class TestLangevin_dynamics(unittest.TestCase):
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output
         
-    def test_potential_energy_force(self):
-        with open('{}'.format('potential_energy_sample')) as potential_energy_vals:
-            values = []
-            for line in potential_energy_vals: 
-                vals = [float(i) for i in line.split()] #Source: http://stackoverflow.com/questions/19555472/change-a-string-of-integers-separated-by-spaces-to-a-list-of-int
-                values.append(vals)
-            values = np.asarray(values)
-            force = langevin_dynamics.potential_energy_force(2.5, values)
-            self.assertEqual(force,-15)
+
 
         
         
