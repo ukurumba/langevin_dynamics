@@ -15,9 +15,7 @@ import numpy as np
 from contextlib import contextmanager
 from click.testing import CliRunner
 
-cd ..
-from langevin_dynamics import langevin_dynamics
-cd tests
+import langevin_dynamics
 from langevin_dynamics import cli
 
 
