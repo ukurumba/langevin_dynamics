@@ -36,8 +36,6 @@ install:
 language: python
 python: 3.5
 script: 
-    - cd tests
-    - import langevin_dynamics
     - python test_langevin_dynamics.py
 after_success: codecov
 
