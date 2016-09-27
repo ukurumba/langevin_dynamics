@@ -34,7 +34,6 @@ def langevin_simulation(init_position, init_velocity, temperature, damp_coeff, t
 
     def stochastic_force(k_d,temp):
         std_dev = np.sqrt(2*2**.5*k_d*temp)
-        print(np.random.normal(0,std_dev))
         return np.random.normal(0,std_dev)
 
     def drag_force(damping_coeff, veloc):
@@ -48,8 +47,18 @@ def langevin_simulation(init_position, init_velocity, temperature, damp_coeff, t
     def velocity(accel, init_veloc, timestep):
         return init_veloc + timestep*accel
 
-    def position(veloc, init_pos, timestep):
-        return init_pos + timestep*veloc
+    def position(init_position, velocity, time_per_step, array):
+        position_particle = init_position + velocity*time_per_step
+        values = np.asarray(array)
+        positions = np.array(values)[:,1]
+        max_val = np.argmax(positions)
+        min_val = np.argmin(positions)
+        while position_particle > positions[max_val]:
+            position_particle = positions[min_val]+ position_particle - positions[max_val]
+        while position_particle < positions[min_val]:
+            position_particle = positions[max_val] - np.abs(position_particle - positions[min_val])
+
+        return position_particle 
 
     with open('{}'.format(potential_energy_file)) as potential_energy_vals:
         values = []
@@ -66,10 +75,28 @@ def langevin_simulation(init_position, init_velocity, temperature, damp_coeff, t
         for i in range(1,total_steps+1): 
             accel = net_accel(pos, veloc, temperature, damp_coeff, time_step, mass,values)
             veloc = velocity(accel,veloc,time_step)
-            print(veloc)
-            pos = position(veloc,pos,time_step)
+            pos = position(veloc,pos,time_step,values)
             t += time_step
             output_file.write('{:.0f} {:.5f} {:.5f} {:.5f}\n'.format(i, t, pos, veloc))
-        print('Final position: {}. Final velocity: {}.'.format(pos, veloc))
-        return 'Output file successfully created @ {}.txt.' .format(output_file_location)
-    
+        
+        return(pos, veloc)
+
+
+def position(init_position, velocity, time_per_step, potential_energy_file):
+    import numpy as np
+    position_particle = init_position + velocity*time_per_step
+    with open('{}'.format(potential_energy_file)) as potential_energy_vals:
+        values = []
+        for line in potential_energy_vals: 
+            vals = [float(i) for i in line.split()] #Source: http://stackoverflow.com/questions/19555472/change-a-string-of-integers-separated-by-spaces-to-a-list-of-int
+            values.append(vals)
+        values = np.asarray(values)
+        positions = np.array(values)[:,1]
+        max_val = np.argmax(positions)
+        min_val = np.argmin(positions)
+        while position_particle > positions[max_val]:
+            position_particle = positions[min_val]+ position_particle - positions[max_val]
+        while position_particle < positions[min_val]:
+            position_particle = positions[max_val] - np.abs(position_particle - positions[min_val])
+
+        return position_particle 

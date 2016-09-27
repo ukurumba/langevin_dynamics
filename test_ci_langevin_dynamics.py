@@ -40,8 +40,26 @@ class TestLangevin_dynamics(unittest.TestCase):
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output
         
+    # def test_potential_energy_force(self):
+    #     with open('{}'.format('potential_energy_sample')) as potential_energy_vals:
+    #         values = []
+    #         for line in potential_energy_vals: 
+    #             vals = [float(i) for i in line.split()] #Source: http://stackoverflow.com/questions/19555472/change-a-string-of-integers-separated-by-spaces-to-a-list-of-int
+    #             values.append(vals)
+    #         values = np.asarray(values)
+    #         force = langevin_dynamics.potential_energy_force(2.5, values)
+    #         self.assertEqual(force,-15)
 
+    def test_boundary_conditions(self):
+        pos1 = langevin_dynamics.position(3, 2, 1, 'potential_energy_sample')
+        pos2 = langevin_dynamics.position(3,-4,1,'potential_energy_sample')
+        self.assertEqual(pos1, 2)
+        self.assertEqual(pos2, 2)
 
+    def test_integrated(self):
+        position_and_velocity = langevin_dynamics.langevin_simulation(1, 1, 10, 1, .1, 20, 'potential_energy_sample', 2)
+        print(type(position_and_velocity))
+        self.assertIsInstance(position_and_velocity, tuple)
         
         
 tests = unittest.TestLoader().loadTestsFromTestCase(TestLangevin_dynamics)
