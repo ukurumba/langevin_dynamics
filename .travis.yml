@@ -23,12 +23,8 @@ deploy:
     tags: true
 env:
 - TOXENV=py35
-- TOXENV=py34
-- TOXENV=py33
-- TOXENV=py27
-- TOXENV=py26
-- TOXENV=pypy
 install: 
+- pip install .
 - pip install -U tox
 - pip install codecov
 - pip install click
@@ -37,6 +33,6 @@ install:
 language: python
 python: 3.5
 script: 
-    - coverage run test_ci_langevin_dynamics.py
+    - coverage run ./tests/test_langevin_dynamics.py
 after_success: codecov
 
