@@ -141,3 +141,8 @@ def potential_energy_force(position_particle, array_of_energy_values):
         pot_energy_force = -1*(values[nearest,2]-values[second_nearest,2])/(values[nearest,1]-values[second_nearest,1])
         
     return pot_energy_force
+
+def stochastic_force(k_d,temp):
+        import numpy as np
+        std_dev = np.sqrt(2*2**.5*k_d*temp)
+        return np.random.normal(0,std_dev)
