@@ -54,14 +54,11 @@ def langevin_simulation(init_position, init_velocity, temperature, damp_coeff, t
         max_val = np.argmax(positions)
         min_val = np.argmin(positions)
         if position_particle > positions[max_val]:
-            while position_particle > positions[max_val]:
-                position_particle = positions[min_val]+ position_particle - positions[max_val]
+            position_particle = positions[min_val]+ position_particle - positions[max_val]
             return position_particle
         elif position_particle < positions[min_val]:
-            while position_particle < positions[min_val]:
-                position_particle = positions[max_val] - np.abs(position_particle - positions[min_val])
+            position_particle = positions[max_val] - np.abs(position_particle - positions[min_val])
             return position_particle
-
         else:
             return position_particle 
 
