@@ -108,3 +108,36 @@ def position(init_position, velocity, time_per_step, potential_energy_file):
 
         else:
             return position_particle 
+
+def potential_energy_force(position_particle, array_of_energy_values):
+    import numpy as np
+    values = array_of_energy_values 
+    def find_nearest(posit,array):
+        #source: http://stackoverflow.com/questions/2566412/find-nearest-value-in-numpy-array
+        positions = np.array(array)[:,1]
+        idx = (np.abs(positions-posit)).argmin()
+        
+        return idx
+    
+    def find_second_nearest(posit, array, idx):
+        positions = np.array(array)[:,1]
+        if positions[idx]-posit == 0:
+            return idx
+        else:
+            actual_value = positions[idx]
+            positions[idx] = positions[idx] + 80000.999 
+            index = (np.abs(positions-posit)).argmin()
+            positions[idx] = actual_value
+            return index
+        
+    
+    nearest = find_nearest(position_particle,values)
+    
+    second_nearest = find_second_nearest(position_particle,values, nearest)
+    
+    if nearest == second_nearest:
+        pot_energy_force = values[nearest,3]
+    else:
+        pot_energy_force = -1*(values[nearest,2]-values[second_nearest,2])/(values[nearest,1]-values[second_nearest,1])
+        
+    return pot_energy_force
