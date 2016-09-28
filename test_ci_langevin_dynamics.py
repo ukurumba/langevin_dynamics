@@ -56,15 +56,6 @@ class TestLangevin_dynamics(unittest.TestCase):
         self.assertEqual(pos1, 2)
         self.assertEqual(pos2, 2)
 
-    def test_stoch_force(self):
-        #test of randomness
-        force = np.empty(1000)
-        for i in range(0,1000,1):
-            force[i] = langevin_dynamics.stochastic_force(3,12)
-        total_force = np.sum(force)
-        less_than = total_force <= 5
-        self.assertTrue(less_than)
-
 
     def test_output(self):
         position_and_velocity = langevin_dynamics.langevin_simulation(1, 1, 10, 1, .1, 20, 'potential_energy_sample', 2)
