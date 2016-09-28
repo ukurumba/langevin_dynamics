@@ -56,11 +56,14 @@ def langevin_simulation(init_position, init_velocity, temperature, damp_coeff, t
         if position_particle > positions[max_val]:
             while position_particle > positions[max_val]:
                 position_particle = positions[min_val]+ position_particle - positions[max_val]
-        elif position_particle < positions[max_val]:
+            return position_particle
+        elif position_particle < positions[min_val]:
             while position_particle < positions[min_val]:
                 position_particle = positions[max_val] - np.abs(position_particle - positions[min_val])
+            return position_particle
 
-        return position_particle 
+        else:
+            return position_particle 
 
     with open('{}'.format(potential_energy_file)) as potential_energy_vals:
         values = []
@@ -100,8 +103,11 @@ def position(init_position, velocity, time_per_step, potential_energy_file):
         if position_particle > positions[max_val]:
             while position_particle > positions[max_val]:
                 position_particle = positions[min_val]+ position_particle - positions[max_val]
-        elif position_particle < positions[max_val]:
+            return position_particle
+        elif position_particle < positions[min_val]:
             while position_particle < positions[min_val]:
                 position_particle = positions[max_val] - np.abs(position_particle - positions[min_val])
+            return position_particle
 
-        return position_particle 
+        else:
+            return position_particle 
