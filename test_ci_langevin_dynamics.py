@@ -58,8 +58,10 @@ class TestLangevin_dynamics(unittest.TestCase):
 
     def test_output(self):
         position_and_velocity = langevin_dynamics.langevin_simulation(1, 1, 10, 1, .1, 20, 'potential_energy_sample', 2)
+        position_and_velocity_2 = langevin_dynamics.langevin_simulation(1, -10, 10, 1, .1, 20, 'potential_energy_sample', 2)
         print(type(position_and_velocity))
         self.assertIsInstance(position_and_velocity, tuple)
+        self.assertIsInstance(position_and_velocity_2,tuple)
 
 
         
