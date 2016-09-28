@@ -12,11 +12,12 @@ Langevin Dynamics
 
 
 .. image:: https://codecov.io/gh/ukurumba/langevin_dynamics/branch/master/graph/badge.svg
-  		:target: https://codecov.io/gh/ukurumba/langevin_dynamics
+		:target: https://codecov.io/gh/ukurumba/langevin_dynamics
 
 
 
-### Molecular modelling based on principles of Langevin Dynamics.
+Molecular modelling based on principles of Langevin Dynamics.
+-------------------------------------------------------------
 
 This package provides a function wherein a particle's motion is described according to the principles of Langevin dynamics. The function models the particle's motion as a result of a stochastic force accounting for molecular interactions, a dampening force accounting for solvent drag, and a force derived from a given potential energy distribution for the system. User inputs include a coefficient for dampening, a given temperature, initial position and velocity. See usage for documentation on how to use function.
 
