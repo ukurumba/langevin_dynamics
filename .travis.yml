@@ -37,7 +37,6 @@ install:
 language: python
 python: 3.5
 script: 
-    - python test_ci_langevin_dynamics.py
     - coverage run test_ci_langevin_dynamics.py
 after_success: codecov
 

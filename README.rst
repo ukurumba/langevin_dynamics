@@ -9,13 +9,17 @@ Langevin Dynamics
 .. image:: https://img.shields.io/travis/ukurumba/langevin_dynamics.svg
         :target: https://travis-ci.org/ukurumba/langevin_dynamics
 
-.. image:: https://readthedocs.org/projects/langevin-dynamics/badge/?version=latest
+.. image:: https://readthedocs.org/projects/langevin--dynamics/badge/?version=latest
         :target: https://langevin-dynamics.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/ukurumba/langevin_dynamics/shield.svg
      :target: https://pyup.io/repos/github/ukurumba/langevin_dynamics/
      :alt: Updates
+
+.. image:: https://codecov.io/gh/ukurumba/langevin_dynamics/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/ukurumba/langevin_dynamics
+
 
 
 Molecular modelling based on principles of Langevin Dynamics.
