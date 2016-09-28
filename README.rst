@@ -16,7 +16,7 @@ Langevin Dynamics
 
 
 
-Molecular modelling based on principles of Langevin Dynamics.
+### Molecular modelling based on principles of Langevin Dynamics.
 
 This package provides a function wherein a particle's motion is described according to the principles of Langevin dynamics. The function models the particle's motion as a result of a stochastic force accounting for molecular interactions, a dampening force accounting for solvent drag, and a force derived from a given potential energy distribution for the system. User inputs include a coefficient for dampening, a given temperature, initial position and velocity. See usage for documentation on how to use function.
 
@@ -30,7 +30,7 @@ This package provides a function wherein a particle's motion is described accord
 Features
 --------
 
-* TODO
+* Contains Langevin dynamics function as well as a few constituent functions for testing purposes. 
 
 Credits
 ---------
