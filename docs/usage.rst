@@ -18,7 +18,7 @@ To use Langevin Dynamics in a project::
     	and each index is on a new line 
 
     #example: 
-    langevin_simulation(1.23,3.34,200, 1, .001, 1000, 'potential_energies_of_system.txt')
+    langevin_dynamics.langevin_simulation(1.23,3.34,200, 1, .001, 1000, 'potential_energies_of_system.txt')
 
     #potential_energies_of_system.txt example: 
     #    1 1.002 3.0 -2.5
