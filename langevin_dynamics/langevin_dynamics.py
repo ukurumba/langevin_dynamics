@@ -1,7 +1,10 @@
 def langevin_simulation(init_position, init_velocity, temperature, damp_coeff, time_step, total_steps, potential_energy_file, mass, output_file_location="langevin_dynamics_output"):
+    
     import numpy as np
+    
     def potential_energy_force(position_particle, array_of_energy_values):
         array_of_energy_values = values
+    
         def find_nearest(posit,array):
             #source: http://stackoverflow.com/questions/2566412/find-nearest-value-in-numpy-array
             positions = np.array(array)[:,1]
@@ -44,6 +47,7 @@ def langevin_simulation(init_position, init_velocity, temperature, damp_coeff, t
         stoch_force = stochastic_force(damp_coeff,temperature)
         drag__force = drag_force(damp_coeff,velocity)
         return (pot_energy_force + stoch_force + drag__force)/mass    
+    
     def velocity(accel, init_veloc, timestep):
         return init_veloc + timestep*accel
 
@@ -53,15 +57,12 @@ def langevin_simulation(init_position, init_velocity, temperature, damp_coeff, t
         positions = np.array(values)[:,1]
         max_val = np.argmax(positions)
         min_val = np.argmin(positions)
-        if position_particle > positions[max_val]:
+        while position_particle > positions[max_val]:
             position_particle = positions[min_val]+ position_particle - positions[max_val]
-            return position_particle
-        elif position_particle < positions[min_val]:
+        while position_particle < positions[min_val]:
             position_particle = positions[max_val] - np.abs(position_particle - positions[min_val])
-            return position_particle
-        else:
-            return position_particle 
-
+        return position_particle
+            
     with open('{}'.format(potential_energy_file)) as potential_energy_vals:
         values = []
         for line in potential_energy_vals: 
@@ -97,17 +98,13 @@ def position(init_position, velocity, time_per_step, potential_energy_file):
         max_val = np.argmax(positions)
         min_val = np.argmin(positions)
 
-        if position_particle > positions[max_val]:
-            while position_particle > positions[max_val]:
-                position_particle = positions[min_val]+ position_particle - positions[max_val]
-            return position_particle
-        elif position_particle < positions[min_val]:
-            while position_particle < positions[min_val]:
-                position_particle = positions[max_val] - np.abs(position_particle - positions[min_val])
-            return position_particle
+        while position_particle > positions[max_val]:
+            position_particle = positions[min_val]+ position_particle - positions[max_val]
 
-        else:
-            return position_particle 
+        while position_particle < positions[min_val]:
+            position_particle = positions[max_val] - np.abs(position_particle - positions[min_val])
+            
+        return position_particle 
 
 def potential_energy_force(position_particle, array_of_energy_values):
     import numpy as np
